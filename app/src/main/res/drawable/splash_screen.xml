@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+
+    <item android:drawable="@color/black" />
+
+    <item
+        android:width="400dp"
+        android:height="380dp"
+        android:gravity="center">
+        <bitmap android:src="@drawable/logo" />
+    </item>
+
+    <item
+        android:width="185dp"
+        android:height="58dp"
+        android:gravity="bottom|center"
+        android:top="800dp">
+        <bitmap android:src="@drawable/sistecredito" />
+    </item>
+
+</layer-list>

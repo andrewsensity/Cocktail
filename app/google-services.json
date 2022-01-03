@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "870625626840",
+    "project_id": "cocktails-899c3",
+    "storage_bucket": "cocktails-899c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870625626840:android:f4f4390eb3f3a90887a5ad",
+        "android_client_info": {
+          "package_name": "com.co.blackhole.cocktails"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870625626840-da79mhj519967pt4ilemsfj6knlf300q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.co.blackhole.cocktails",
+            "certificate_hash": "3bd65e7641e0b0ff42675e6a3e00f0c7067565bd"
+          }
+        },
+        {
+          "client_id": "870625626840-if99ifd5l9c1ltb7huejn9b0egnhm9pi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5ILF6vc3l4BMEctiUPPDfnl1tgYpqE4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870625626840-if99ifd5l9c1ltb7huejn9b0egnhm9pi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
