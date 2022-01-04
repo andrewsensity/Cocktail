@@ -1,8 +1,6 @@
 package com.co.blackhole.cocktails.ui.fragment
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +14,8 @@ import com.co.blackhole.cocktails.R
 import com.co.blackhole.cocktails.data.DataSource
 import com.co.blackhole.cocktails.databinding.FragmentDetailBinding
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.DecimalFormat
@@ -27,6 +27,7 @@ class DetailFragment : Fragment() {
     private lateinit var navController: NavController
     private val args: DetailFragmentArgs by navArgs()
     private val db = Firebase.firestore
+    private var shopId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,15 +68,12 @@ class DetailFragment : Fragment() {
             binding.tvQuantity.text = quantity.toString()
         }
         binding.fabCart.setOnClickListener {
-            val size = DataSource().clients.size
-            val numRandom = (0..size).random()
+            val numRandom = (DataSource().clients.indices).random()
             val client = DataSource().clients[numRandom]
             val price = args.price.toInt()
             val cocktail: String = binding.tvDetailTitle.text.toString()
 
             insertShopFirebase(client, cocktail, quantity, price)
-            //Thread.sleep(2000)
-            //navController.navigate(R.id.action_detailFragment_to_mainFragment)
         }
     }
 
@@ -87,15 +85,40 @@ class DetailFragment : Fragment() {
             "precio" to price
         )
 
-        db.collection("compras")
-            .add(shop)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                Toast.makeText(requireContext(), "Hola $client, en breve recibiras tu pedido, gracias por tu compra.", Toast.LENGTH_LONG).show()
+        val rootRef = FirebaseFirestore.getInstance()
+        val shopsRef = rootRef.collection("compras")
+        shopsRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                task.result?.apply {
+                    print("size: ${size()}")
+                    shopId = size()
+                }
+            } else {
+                task.exception?.message?.let {
+                    print(it)
+                }
+            }
+        }
+
+        db.collection("compras").document(shopId.toString())
+            .set(shop)
+            .addOnSuccessListener {
+                MaterialAlertDialogBuilder(requireContext(),
+                    R.style.MaterialAlertDialog_MaterialComponents_App)
+                    .setTitle("Registro Pedido")
+                    .setBackground(resources.getDrawable(R.drawable.alert_background))
+                    .setMessage("Hola $client, has pedido $quantity cocteles $cocktail, en breve recibiras tu orden, gracias por tu compra.")
+                    .setPositiveButton("Continuar") { dialog, which ->
+                        navController.navigate(R.id.action_detailFragment_to_mainFragment)
+                    }
+                    .show()
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-                Toast.makeText(requireContext(), "Lamentamos los inconvenientes, intentalo de nuevamente.", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Lamentamos los inconvenientes, intentalo de nuevamente.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
     }
 }

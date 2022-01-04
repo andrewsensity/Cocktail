@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface CocktailApi {
 
-    @GET("filter.php?c=Cocktail")
-//    @GET("filter.php?c=Ordinary_Drink")
+//    @GET("filter.php?c=Cocktail")
+    @GET("filter.php?c=Ordinary_Drink")
     fun getCocktails(): Call<CocktailResponse>
 }

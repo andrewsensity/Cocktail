@@ -17,4 +17,8 @@
     <style name="Splash" parent="Theme.Cocktails">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
+
+    <style name="MaterialAlertDialog.MaterialComponents.App" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">#E91E63</item>
+    </style>
 </resources>
