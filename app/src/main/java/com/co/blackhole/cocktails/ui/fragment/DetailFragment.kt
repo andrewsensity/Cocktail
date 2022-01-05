@@ -10,8 +10,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.co.blackhole.cocktails.CocktailApplication.Companion.prefs
 import com.co.blackhole.cocktails.R
 import com.co.blackhole.cocktails.data.DataSource
+import com.co.blackhole.cocktails.data.Prefs
 import com.co.blackhole.cocktails.databinding.FragmentDetailBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -27,7 +29,6 @@ class DetailFragment : Fragment() {
     private lateinit var navController: NavController
     private val args: DetailFragmentArgs by navArgs()
     private val db = Firebase.firestore
-    private var shopId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,7 +92,7 @@ class DetailFragment : Fragment() {
             if (task.isSuccessful) {
                 task.result?.apply {
                     print("size: ${size()}")
-                    shopId = size()
+                    prefs.shopID = size()
                 }
             } else {
                 task.exception?.message?.let {
@@ -100,7 +101,7 @@ class DetailFragment : Fragment() {
             }
         }
 
-        db.collection("compras").document(shopId.toString())
+        db.collection("compras").document(prefs.shopID.toString())
             .set(shop)
             .addOnSuccessListener {
                 MaterialAlertDialogBuilder(requireContext(),

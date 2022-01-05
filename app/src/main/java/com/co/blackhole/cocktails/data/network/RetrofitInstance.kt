@@ -1,4 +1,4 @@
-package com.co.blackhole.cocktails.network
+package com.co.blackhole.cocktails.data.network
 
 import com.co.blackhole.cocktails.util.Constants.BASE_URL
 import okhttp3.OkHttpClient

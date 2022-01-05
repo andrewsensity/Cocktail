@@ -1,4 +1,4 @@
-package com.co.blackhole.cocktails.network
+package com.co.blackhole.cocktails.data.network
 
 import com.co.blackhole.cocktails.data.model.CocktailResponse
 import retrofit2.Call

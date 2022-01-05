@@ -12,19 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.co.blackhole.cocktails.R
 import com.co.blackhole.cocktails.adapter.CocktailAdapter
-import com.co.blackhole.cocktails.data.database.CocktailDatabase
 import com.co.blackhole.cocktails.data.model.CocktailResponse
 import com.co.blackhole.cocktails.data.model.Cocktail
 import com.co.blackhole.cocktails.databinding.FragmentMainBinding
-import com.co.blackhole.cocktails.network.RetrofitInstance
+import com.co.blackhole.cocktails.data.network.RetrofitInstance
 import com.co.blackhole.cocktails.ui.viewmodel.CocktailViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import retrofit2.Call
 import retrofit2.Response
-import java.text.DecimalFormat
 
 class MainFragment : Fragment(), CocktailAdapter.OnItemClickListener {
 
